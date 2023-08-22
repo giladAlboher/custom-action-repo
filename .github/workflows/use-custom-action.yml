@@ -21,8 +21,8 @@ jobs:
               with:
                 node-version: '14'
 # pull the custom action from docker hub
-            - name: Pull Custom Docker Action
-              uses: docker://custom-action
-              with:
-                    entrypoint: /entrypoint.sh
-                    args: --name ${{ github.event.repository.name }}
+            - name: Pull Docker Image
+              run: docker pull custom-actiom
+
+            - name: run the container
+              run: docker run custom-actiom

@@ -5,10 +5,10 @@ FROM node:14
 WORKDIR /app
 
 # Copy action code to the container
-COPY entrypoint.sh /app/entrypoint.sh
+COPY entrypoint.sh .
 
 # Make the entrypoint script executable
-RUN chmod +x /app/entrypoint.sh
+RUN chmod +x entrypoint.sh
 
 # Set the entrypoint for the container
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
