@@ -2,6 +2,8 @@ name: Use Custom Docker Action
 on:
   workflow_run:
     workflows: ["push-image"]
+    types:
+      - completed
     branches:
       - main
 jobs:
