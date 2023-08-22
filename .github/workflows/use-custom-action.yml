@@ -15,7 +15,9 @@ jobs:
               uses: actions/setup-node@v2
               with:
                 node-version: '14'
-      
-            - name: Use Custom Docker Action
+# pull the custom action from docker hub
+            - name: Pull Custom Docker Action
               uses: docker://custom-action
-      
+              with:
+                    entrypoint: /entrypoint.sh
+                    args: --name ${{ github.event.repository.name }}
