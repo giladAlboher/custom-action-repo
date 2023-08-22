@@ -23,17 +23,13 @@ jobs:
             - name: Wait for Workflow A completion
               run: echo "Waiting for Workflow A to complete..."
 
-            
+                
             - name: Check Workflow A status
               run: |
-                if [ "${{ steps.workflow_status.outputs.status }}" != "success" ]; then
-                sleep 10
-                fi
-                if [ "${{ steps.workflow_status.outputs.status }}" != "success" ]; then
-                echo "Workflow A failed"
-                exit 1
-                fi
+                while [ "${{ steps.workflow_status.outputs.status }}" == "success" ]; then
+                done
 
+                
 # pull the custom action from docker hub
             - name: pull and run
               run: |
