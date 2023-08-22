@@ -19,7 +19,20 @@ jobs:
               with:
                 username: ${{ secrets.docker_username }}
                 password: ${{ secrets.docker_hub_token }}
-      
+#add a step that can only start if the output workflow_status is succesful
+            - name: Wait for Workflow A completion
+              run: echo "Waiting for Workflow A to complete..."
+
+            - name: Check Workflow A status
+              run: |
+                if [ "${{ steps.workflow_status.outputs.status }}" != "success" ]; then
+                echo "Workflow A failed"
+                exit 1
+                fi
+
 # pull the custom action from docker hub
-            - name: build and run
-            uses: docker://${{ secrets.docker_username }}/custom-action:${{ github.sha }} 
+            - name: pull and run
+              run: |
+                docker pull ${{ secrets.docker_username }}/custom-action:${{ github.sha }}
+                docker run ${{ secrets.docker_username }}/custom-action:${{ github.sha }}
+         
