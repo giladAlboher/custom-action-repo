@@ -19,12 +19,16 @@ jobs:
               with:
                 username: ${{ secrets.docker_username }}
                 password: ${{ secrets.docker_hub_token }}
-#add a step that can only start if the output workflow_status is succesful
+#add a step that can only start after workflow A is completed
             - name: Wait for Workflow A completion
               run: echo "Waiting for Workflow A to complete..."
 
+            
             - name: Check Workflow A status
               run: |
+                if [ "${{ steps.workflow_status.outputs.status }}" != "success" ]; then
+                sleep 10
+                fi
                 if [ "${{ steps.workflow_status.outputs.status }}" != "success" ]; then
                 echo "Workflow A failed"
                 exit 1
