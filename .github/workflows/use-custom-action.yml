@@ -22,7 +22,7 @@ jobs:
                 node-version: '14'
 # pull the custom action from docker hub
             - name: Pull Docker Image
-              run: docker pull custom-actiom
+              run: docker pull nodejs
 
             - name: run the container
               run: docker run custom-actiom
