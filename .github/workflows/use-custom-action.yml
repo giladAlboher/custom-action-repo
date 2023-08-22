@@ -8,6 +8,10 @@ jobs:
           runs-on: ubuntu-latest
       
           steps:
+            - name: set up QEMU
+              uses: docker/setup-qemu-action@v1
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v1
             - name: Checkout code
               uses: actions/checkout@v3
             - name: Login to Docker Hub
@@ -16,13 +20,9 @@ jobs:
                 username: ${{ secrets.docker_username }}
                 password: ${{ secrets.docker_hub_token }}
       
-            - name: Set up Node.js
-              uses: actions/setup-node@v2
-              with:
-                node-version: '14'
 # pull the custom action from docker hub
             - name: Pull Docker Image
-              run: docker pull nodejs
+              run: docker pull giladalboher/nodejs
 
             - name: run the container
-              run: docker run custom-actiom
+              run: docker run giladalboher/nodejs
