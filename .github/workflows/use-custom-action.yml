@@ -1,0 +1,21 @@
+name: Use Custom Docker Action
+on:
+  push:
+    branches:
+      - main
+jobs:
+        run-custom-action:
+          runs-on: ubuntu-latest
+      
+          steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+      
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                node-version: '14'
+      
+            - name: Use Custom Docker Action
+              uses: docker://custom-action
+      
